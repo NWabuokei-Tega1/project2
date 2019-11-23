@@ -11,8 +11,6 @@ document.getElementById('sub').onclick = () => {
 
 async function getTimeZone(loc) {
 	const r = await fetch(`https://api.opencagedata.com/geocode/v1/json?key=${gkey}&q=${loc}`);
-	console.log(r);
-
 	const res = await r.json();
 
 	lat = res.results[0].geometry.lat;
@@ -30,7 +28,10 @@ async function getTimeZone(loc) {
 	getLocation(lat, lng).then(res => {
 		document.getElementById('loader').style.display = "none";
 		document.getElementById('time').innerHTML = res;
-	}).catch(error => window.alert("Location locked!"));
+	}).catch(error => {
+		document.getElementById('loader').style.display = "none";
+		window.alert("Location 	Cannot Be Presently Accessed!");
+	});
 }
 
 async function getLocation(lat,lng){
